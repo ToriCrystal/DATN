@@ -1,0 +1,215 @@
+#imagePreview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+#imagePreview img {
+    max-width: 100px;
+    height: auto;
+    border: 1px solid #ddd;
+}
+
+.table-cell {
+    text-align: center;
+}
+
+.table-cell img {
+    width: 50px;
+    height: 50px;
+}
+
+.table-cell img {
+    margin: 5px;
+}
+
+.table-cell img {
+    border: 1px solid #000;
+}
+
+.table-cell img {
+    display: inline-block;
+}
+
+.table td {
+    text-align: center;
+    border: 1px solid #ccc;
+    padding: 8px;
+    max-width: 200px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+}
+
+.expandable-cell .expand-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    max-width: 300px;
+    z-index: 1;
+}
+
+.expandable-cell .expand-button {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+}
+
+.limited-text {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 200px;
+}
+
+.form_log_1 {
+    border: none;
+    display: flex;
+    align-items: center;
+}
+
+.form_log_1 img {
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 10px;
+}
+
+.form_log_1 p {
+    margin: 0;
+    flex: 1;
+}
+
+.form_log_1 button {
+    background-color: #f00;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form-group select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: #fff;
+}
+
+/* Style the select options */
+.form-group select option {
+    font-size: 16px;
+}
+
+.form_head {
+    text-align: center;
+    margin-bottom: 5px;
+}
+
+.form_head p:nth-child(1) {
+    font-weight: bold;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.form_head p:nth-child(2) {
+    color: rgb(80, 77, 77);
+    font-size: 15px;
+
+}
+
+.form_box {
+    width: 50%;
+    height: 30px;
+    border: 3px dashed steelblue;
+    text-align: center;
+    /* padding: 30px 20px; */
+    margin-bottom: 20px;
+}
+
+.form_box i {
+    font-size: 50px;
+    color: steelblue;
+    margin-bottom: 20px;
+}
+
+.form_box p {
+    color: rgb(85, 82, 82);
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.form_box button {
+    width: 50%;
+    border: none;
+    font-weight: bold;
+    color: #fff;
+    background-color: steelblue;
+    padding: 10px 5px;
+    border-radius: 5px;
+}
+
+
+.form_log>p {
+
+    color: gray;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.form_log_1 {
+    width: 50%;
+    /* border: 0.5px solid gray; */
+    border-radius: 5px;
+    /* padding: 5px; */
+    /* margin-bottom: 10px; */
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.form_log_1 i {
+    font-size: 30px;
+}
+
+.form_log_1 div {
+    flex-grow: 1;
+}
+
+
+.range {
+    width: 50%;
+    height: 10px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    background-color: gray;
+    position: relative;
+
+}
+
+.range::before {
+    content: " ";
+
+    width: calc(50% + 4px);
+    height: 10px;
+
+    border-radius: 5px;
+    background-color: steelblue;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+
+
+}
+
+.form_log_1 button {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+}
+
+.size {
+    color: rgb(73, 68, 68);
+}

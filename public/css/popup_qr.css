@@ -1,0 +1,845 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    scroll-behavior: smooth
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+i,
+span,
+td,
+th,
+input,
+button,
+textarea,
+strong,
+div {
+    font-family: Cairo, sans-serif;
+    font-weight: 300;
+    margin-block-start: 0;
+    margin-block-end: 0
+}
+
+body {
+    overflow-x: hidden;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-size: cover
+}
+
+input {
+    border-radius: 0
+}
+
+.container-fluid,
+.container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    position: relative;
+    padding-right: 10px;
+    padding-left: 10px
+}
+
+@media (min-width: 1025px) {
+    .container-fluid,
+    .container {
+        padding-right: 15px;
+        padding-left: 15px
+    }
+}
+
+@media (min-width: 1025px) {
+    .container {
+        max-width: 1120px
+    }
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -10px;
+    margin-left: -10px
+}
+
+@media (min-width: 1025px) {
+    .row {
+        margin-left: -15px;
+        margin-right: -15px
+    }
+}
+
+.col,
+[class*=col-] {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px
+}
+
+@media (min-width: 1025px) {
+    .col,
+    [class*=col-] {
+        padding-right: 15px;
+        padding-left: 15px
+    }
+}
+
+.no-gutters {
+    margin-right: 0;
+    margin-left: 0
+}
+
+.no-gutters>.col,
+.no-gutters>[class*=col-] {
+    padding-right: 0;
+    padding-left: 0
+}
+
+.col {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%
+}
+
+.col-auto {
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%
+}
+
+.col-1 {
+    flex: 0 0 8.333333%;
+    max-width: 8.333333%
+}
+
+.col-2 {
+    flex: 0 0 16.666667%;
+    max-width: 16.666667%
+}
+
+.col-3 {
+    flex: 0 0 25%;
+    max-width: 25%
+}
+
+.col-4 {
+    flex: 0 0 33.333333%;
+    max-width: 33.333333%
+}
+
+.col-5 {
+    flex: 0 0 41.666667%;
+    max-width: 41.666667%
+}
+
+.col-6 {
+    flex: 0 0 50%;
+    max-width: 50%
+}
+
+.col-7 {
+    flex: 0 0 58.333333%;
+    max-width: 58.333333%
+}
+
+.col-8 {
+    flex: 0 0 66.666667%;
+    max-width: 66.666667%
+}
+
+.col-9 {
+    flex: 0 0 75%;
+    max-width: 75%
+}
+
+.col-10 {
+    flex: 0 0 83.333333%;
+    max-width: 83.333333%
+}
+
+.col-11 {
+    flex: 0 0 91.666667%;
+    max-width: 91.666667%
+}
+
+.col-12 {
+    flex: 0 0 100%;
+    max-width: 100%
+}
+
+@media (min-width: 576px) {
+    .col-sm {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%
+    }
+    .col-sm-auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%
+    }
+    .col-sm-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%
+    }
+    .col-sm-2 {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%
+    }
+    .col-sm-3 {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+    .col-sm-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%
+    }
+    .col-sm-5 {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%
+    }
+    .col-sm-6 {
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .col-sm-7 {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%
+    }
+    .col-sm-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%
+    }
+    .col-sm-9 {
+        flex: 0 0 75%;
+        max-width: 75%
+    }
+    .col-sm-10 {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%
+    }
+    .col-sm-11 {
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%
+    }
+    .col-sm-12 {
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+}
+
+@media (min-width: 768px) {
+    .col-md {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%
+    }
+    .col-md-auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%
+    }
+    .col-md-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%
+    }
+    .col-md-2 {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%
+    }
+    .col-md-3 {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+    .col-md-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%
+    }
+    .col-md-5 {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%
+    }
+    .col-md-6 {
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .col-md-7 {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%
+    }
+    .col-md-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%
+    }
+    .col-md-9 {
+        flex: 0 0 75%;
+        max-width: 75%
+    }
+    .col-md-10 {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%
+    }
+    .col-md-11 {
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%
+    }
+    .col-md-12 {
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+}
+
+@media (min-width: 1025px) {
+    .col-lg {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%
+    }
+    .col-lg-auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%
+    }
+    .col-lg-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%
+    }
+    .col-lg-2 {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%
+    }
+    .col-lg-3 {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+    .col-lg-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%
+    }
+    .col-lg-5 {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%
+    }
+    .col-lg-6 {
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .col-lg-7 {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%
+    }
+    .col-lg-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%
+    }
+    .col-lg-9 {
+        flex: 0 0 75%;
+        max-width: 75%
+    }
+    .col-lg-10 {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%
+    }
+    .col-lg-11 {
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%
+    }
+    .col-lg-12 {
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+}
+
+@media (min-width: 1200px) {
+    .col-xl {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%
+    }
+    .col-xl-auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%
+    }
+    .col-xl-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%
+    }
+    .col-xl-2 {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%
+    }
+    .col-xl-3 {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+    .col-xl-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%
+    }
+    .col-xl-5 {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%
+    }
+    .col-xl-6 {
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .col-xl-7 {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%
+    }
+    .col-xl-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%
+    }
+    .col-xl-9 {
+        flex: 0 0 75%;
+        max-width: 75%
+    }
+    .col-xl-10 {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%
+    }
+    .col-xl-11 {
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%
+    }
+    .col-xl-12 {
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+}
+
+@media (min-width: 1360px) {
+    .col-2xl {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%
+    }
+    .col-2xl-auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%
+    }
+    .col-2xl-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%
+    }
+    .col-2xl-2 {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%
+    }
+    .col-2xl-3 {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+    .col-2xl-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%
+    }
+    .col-2xl-5 {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%
+    }
+    .col-2xl-6 {
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .col-2xl-7 {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%
+    }
+    .col-2xl-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%
+    }
+    .col-2xl-9 {
+        flex: 0 0 75%;
+        max-width: 75%
+    }
+    .col-2xl-10 {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%
+    }
+    .col-2xl-11 {
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%
+    }
+    .col-2xl-12 {
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+}
+
+@media (min-width: 1440px) {
+    .col-3xl {
+        flex-basis: 0;
+        flex-grow: 1;
+        max-width: 100%
+    }
+    .col-3xl-auto {
+        flex: 0 0 auto;
+        width: auto;
+        max-width: 100%
+    }
+    .col-3xl-1 {
+        flex: 0 0 8.333333%;
+        max-width: 8.333333%
+    }
+    .col-3xl-2 {
+        flex: 0 0 16.666667%;
+        max-width: 16.666667%
+    }
+    .col-3xl-3 {
+        flex: 0 0 25%;
+        max-width: 25%
+    }
+    .col-3xl-4 {
+        flex: 0 0 33.333333%;
+        max-width: 33.333333%
+    }
+    .col-3xl-5 {
+        flex: 0 0 41.666667%;
+        max-width: 41.666667%
+    }
+    .col-3xl-6 {
+        flex: 0 0 50%;
+        max-width: 50%
+    }
+    .col-3xl-7 {
+        flex: 0 0 58.333333%;
+        max-width: 58.333333%
+    }
+    .col-3xl-8 {
+        flex: 0 0 66.666667%;
+        max-width: 66.666667%
+    }
+    .col-3xl-9 {
+        flex: 0 0 75%;
+        max-width: 75%
+    }
+    .col-3xl-10 {
+        flex: 0 0 83.333333%;
+        max-width: 83.333333%
+    }
+    .col-3xl-11 {
+        flex: 0 0 91.666667%;
+        max-width: 91.666667%
+    }
+    .col-3xl-12 {
+        flex: 0 0 100%;
+        max-width: 100%
+    }
+}
+
+::-webkit-scrollbar {
+    width: 2px !important;
+    height: 0 !important
+}
+
+::-webkit-scrollbar-track {
+    background: #15202b;
+    height: 0 !important
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3affe7 !important;
+    height: 0 !important
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #3affe7 !important
+}
+
+.management-main {
+    min-height: calc(100vh - 268.86px);
+    display: flex;
+    justify-content: center
+}
+
+.management-main .management {
+    margin-top: 30px;
+    max-width: 800px;
+    width: 100%;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 30px 50px 40px;
+    border-radius: 20px;
+    background-color: #001d26e6;
+    border: 1px solid rgba(143, 227, 255, .3)
+}
+
+.management-main .management .detail {
+    display: flex;
+    margin-top: 30px;
+    gap: 30px
+}
+
+.management-main .management .detail .body-detail {
+    width: 100%
+}
+
+.management-main .management .detail .body-detail h3 {
+    font-size: 14px;
+    color: #8fe7ff;
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 10px
+}
+
+#showError .jw-modal .jw-modal-body {
+    pointer-events: visible;
+    width: 360px;
+    border-radius: 20px;
+    border: 1px solid rgba(48, 48, 48, .6);
+    background-color: #000000b3;
+    position: relative;
+    top: 30%;
+    transform: translateY(-30%)
+}
+
+#showError .jw-modal .jw-modal-body h3 {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: center
+}
+
+#showError .jw-modal .jw-modal-body img {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer
+}
+
+#showError .jw-modal .jw-modal-body .fill {
+    text-align: center
+}
+
+#showError .jw-modal .jw-modal-body .fill input {
+    padding: 10px;
+    margin: 20px 0;
+    outline: none;
+    border: unset;
+    font-weight: 600
+}
+
+#showError .jw-modal .jw-modal-body .button {
+    text-align: center
+}
+
+#showError .jw-modal .jw-modal-body div button {
+    padding: 7px 8px;
+    margin: 0 5px;
+    color: #fff;
+    cursor: pointer;
+    outline: none
+}
+
+#showError .jw-modal .jw-modal-body div button:last-child {
+    background-color: #ce2c2c
+}
+
+#openQR .jw-modal .jw-modal-body,
+#checkBuy .jw-modal .jw-modal-body {
+    pointer-events: visible;
+    position: relative
+}
+
+#openQR .jw-modal .jw-modal-body,
+#checkBuy .jw-modal .jw-modal-body {
+    width: 95%;
+    max-width: 700px;
+    background-color: #fff;
+    border-radius: 10px;
+    top: 30%;
+    transform: translateY(-30%)
+}
+
+#openQR .jw-modal .jw-modal-body img,
+#checkBuy .jw-modal .jw-modal-body img {
+    background-color: #111036;
+    border-radius: 50%
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr,
+#checkBuy .jw-modal .jw-modal-body .body-qr {
+    display: flex;
+    flex-wrap: wrap
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-left,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-left {
+    flex: 40%;
+    background: linear-gradient(134deg, #04a468 0%, #0d788c 100%);
+    border-radius: 10px;
+    padding: 15px
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-left p,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-left p {
+    font-size: 15px;
+    padding: 15px 0;
+    color: #fff;
+    font-weight: 500;
+    border-bottom: 1px dotted #fff
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-left p span,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-left p span {
+    font-weight: 700;
+    font-size: 17px;
+    margin-left: 10px
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-left p:first-child span,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-left p:first-child span {
+    margin-left: unset
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-left p:last-child,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-left p:last-child {
+    border-bottom: unset
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-left p a,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-left p a {
+    color: #ffbc0e;
+    font-weight: 700
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-left h3,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-left h3 {
+    font-size: 20px;
+    color: #fff;
+    text-align: center;
+    font-weight: 700
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-right,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-right {
+    flex: 60%;
+    padding: 30px
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-right h3,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-right h3 {
+    font-size: 20px;
+    color: #111036;
+    text-align: center;
+    font-weight: 700
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-right p,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-right p {
+    font-size: 15px;
+    margin: 10px 0 5px;
+    color: #04a468;
+    font-weight: 500
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-right p span,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-right p span {
+    font-weight: 700;
+    font-size: 17px
+}
+
+#openQR .jw-modal .jw-modal-body .body-qr .item-right .img-item img,
+#checkBuy .jw-modal .jw-modal-body .body-qr .item-right .img-item img {
+    border-radius: unset;
+    position: relative;
+    width: 100%;
+    background-color: unset
+}
+
+@media (max-width: 992px) {
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right {
+        flex: 100%;
+        padding: 0
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left p,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right p,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left p,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right p {
+        font-size: 12px
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left p span,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right p span,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left p span,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right p span {
+        font-size: 14px
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left p.content-sub,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right p.content-sub,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left p.content-sub,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right p.content-sub {
+        font-size: 10px
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left h3,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right h3,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left h3,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right h3 {
+        font-size: 17px
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left .img-item,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right .img-item,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left .img-item,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right .img-item {
+        text-align: center
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left .img-item img,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right .img-item img,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left .img-item img,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right .img-item img {
+        width: 60%
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-right,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-right {
+        padding-top: 20px
+    }
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left,
+    #openQR .jw-modal .jw-modal-body .body-qr .item-left p,
+    #checkBuy .jw-modal .jw-modal-body .body-qr .item-left p {
+        padding: 5px
+    }
+}
+
+#checkBuy .jw-modal .jw-modal-body {
+    max-width: 350px
+}
+
+#checkBuy .jw-modal .jw-modal-body img {
+    position: absolute;
+    right: 5px;
+    top: 5px
+}
+
+@media (max-width: 768px) {
+    .hide-mobile {
+        display: none
+    }
+}
+
+@media (max-width: 568px) {
+    .management-main .management {
+        padding: 30px 20px
+    }
+    .management-main .management .detail {
+        display: flex;
+        flex-direction: column;
+        gap: 10px
+    }
+}
