@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Models\Products;
+use App\Models\Product;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -17,6 +17,7 @@ class OrdersController extends Controller
     {
         return session()->get('cart', []);
     }
+
     public function calculateTotalPrice($cart)
     {
         $total = 0;
@@ -28,9 +29,10 @@ class OrdersController extends Controller
 
         return $total;
     }
+
     public function addToCart(Request $request, $id)
     {
-        $product = Products::find($id);
+        $product = Product::find($id);
     
         $cart = $this->getCartData();
     

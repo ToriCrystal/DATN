@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Products;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\Wishlist;
 use App\Models\User;
@@ -15,20 +15,22 @@ use App\Models\CategoryPost;
 use App\Services\CartService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Stripe\Product;
+use Stripe\Products;
 use App\Models\Author;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\Session;
+
 class PostController extends Controller
 {
     public function __construct()
     {
         $this->shareData();
     }
+
     public function shareData()
-    {   
-        $newsPostCategory = CategoryPost::all();
-        $topProducts = Products::where('isHot', 1)
+    {
+        $newsPostCategory = CategoryPost::has('posts', '>', 0)->get();
+        $topProducts = Product::where('isHot', 1)
             ->orderBy('views', 'desc')
             ->orderBy('likes', 'desc')
             ->take(4)
@@ -38,9 +40,9 @@ class PostController extends Controller
             ->take(4)
             ->get();
         $category = Category::orderBy('created_at', 'desc')->withCount('products')->get();
-        $products = Products::paginate(16);
-        $totalCount = Products::count();
-        $sumPro = Products::count();
+        $products = Product::paginate(16);
+        $totalCount = Product::count();
+        $sumPro = Product::count();
         $categoryDetails = CategoryDetail::all();
         $groupedData = [];
         foreach ($categoryDetails as $detail) {
@@ -58,7 +60,7 @@ class PostController extends Controller
             if ($user && isset($user->wishlist)) {
                 $wishlist = json_decode($user->wishlist, true) ?: [];
 
-                $wishlistItems = Products::whereIn('id', $wishlist)->get();
+                $wishlistItems = Product::whereIn('id', $wishlist)->get();
             }
         }
         $attributes = [];
@@ -88,7 +90,7 @@ class PostController extends Controller
             ->paginate(16);
         return view('page.news-category', compact('newsCategory', 'cart'));
     }
-    
+
     public function news()
     {
         $cart = session()->get('cart', []);
@@ -99,50 +101,50 @@ class PostController extends Controller
             ->paginate(12);
         return view('page.news', compact('news', 'cart'));
     }
-    
+
     public function newsDetail($id)
     {
         $cart = session()->get('cart', []);
 
         try {
             $newsDetail = Post::join('posts_category', 'posts.post_category_id', '=', 'posts_category.id')
-            ->join('admins', 'posts.admin_id', '=', 'admins.id')
-            ->leftJoin('comments_post', 'posts.id', '=', 'comments_post.post_id')
-            ->where('posts.id', $id)
-            ->select(
-                'posts.id',
-                'posts.post_category_id',
-                'posts.post_title',
-                'posts.post_slug',
-                'posts.post_excerpt',
-                'posts.post_thumbnail',
-                'posts.post_content',
-                'posts.status',
-                'posts.published_at',
-                'posts.views', // Add views to the selected columns
-                'posts_category.post_category_name',
-                'posts_category.post_category_slug',
-                'admins.name as author_name',
-                'admins.image as author_image',
-                \DB::raw('COUNT(comments_post.id) as comment_count')
-            )
-            ->groupBy(
-                'posts.id',
-                'posts.post_category_id',
-                'posts.post_title',
-                'posts.post_slug',
-                'posts.post_excerpt',
-                'posts.post_thumbnail',
-                'posts.post_content',
-                'posts.status',
-                'posts.published_at',
-                'posts_category.post_category_name',
-                'posts_category.post_category_slug',
-                'posts.views',
-                'admins.name',
-                'admins.image'
-            )
-            ->firstOrFail();
+                ->join('admins', 'posts.admin_id', '=', 'admins.id')
+                ->leftJoin('comments_post', 'posts.id', '=', 'comments_post.post_id')
+                ->where('posts.id', $id)
+                ->select(
+                    'posts.id',
+                    'posts.post_category_id',
+                    'posts.post_title',
+                    'posts.post_slug',
+                    'posts.post_excerpt',
+                    'posts.post_thumbnail',
+                    'posts.post_content',
+                    'posts.status',
+                    'posts.published_at',
+                    'posts.views', // Add views to the selected columns
+                    'posts_category.post_category_name',
+                    'posts_category.post_category_slug',
+                    'admins.name as author_name',
+                    'admins.image as author_image',
+                    \DB::raw('COUNT(comments_post.id) as comment_count')
+                )
+                ->groupBy(
+                    'posts.id',
+                    'posts.post_category_id',
+                    'posts.post_title',
+                    'posts.post_slug',
+                    'posts.post_excerpt',
+                    'posts.post_thumbnail',
+                    'posts.post_content',
+                    'posts.status',
+                    'posts.published_at',
+                    'posts_category.post_category_name',
+                    'posts_category.post_category_slug',
+                    'posts.views',
+                    'admins.name',
+                    'admins.image'
+                )
+                ->firstOrFail();
 
             // Tăng lượt xem
             $newsDetail->increment('views');
@@ -159,7 +161,7 @@ class PostController extends Controller
             abort(404);
         }
     }
-    
+
     public function newsNext($id)
     {
         $nextPost = Post::where('id', '>', $id)->orderBy('id', 'asc')->first();

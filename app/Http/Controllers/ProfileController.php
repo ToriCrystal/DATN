@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use App\Models\User;
 use Illuminate\View\View;
-use App\Models\Products;
+use App\Models\Product;
 use App\Models\Author;
 
 use Illuminate\Support\Facades\Hash;
@@ -30,8 +30,8 @@ class ProfileController extends Controller
 
     public function shareData()
     {
-        $newsPostCategory = CategoryPost::all();
-        $topProducts = Products::where('isHot', 1)
+        $newsPostCategory = CategoryPost::has('posts', '>', 0)->get();
+        $topProducts = Product::where('isHot', 1)
             ->orderBy('views', 'desc')
             ->orderBy('likes', 'desc')
             ->take(4)
@@ -41,9 +41,9 @@ class ProfileController extends Controller
             ->take(4)
             ->get();
         $category = Category::orderBy('created_at', 'desc')->withCount('products')->get();
-        $products = Products::paginate(16);
-        $totalCount = Products::count();
-        $sumPro = Products::count();
+        $products = Product::paginate(16);
+        $totalCount = Product::count();
+        $sumPro = Product::count();
         $categoryDetails = CategoryDetail::all();
         $groupedData = [];
 
@@ -67,7 +67,7 @@ class ProfileController extends Controller
             if ($user && isset($user->wishlist)) {
                 $wishlist = json_decode($user->wishlist, true) ?: [];
 
-                $wishlistItems = Products::whereIn('id', $wishlist)->get();
+                $wishlistItems = Product::whereIn('id', $wishlist)->get();
             }
         }
 
@@ -104,7 +104,7 @@ class ProfileController extends Controller
                 // Flatten the nested array
                 $flattenedWishlist = collect($wishlist)->flatten()->toArray();
 
-                $wishlistItems = Products::whereIn('id', $flattenedWishlist)->get();
+                $wishlistItems = Product::whereIn('id', $flattenedWishlist)->get();
             }
         }
         return view('page.profile', compact('user', 'cart'));

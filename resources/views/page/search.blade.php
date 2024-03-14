@@ -1,7 +1,7 @@
 @extends('layouts.layoutUser')
 
 @section('title')
-    kết quả tìm kiếm
+    
 @endsection
 
 @section('noidung')
@@ -14,7 +14,7 @@
                         <h1>Sản phẩm</h1>
                         <ol class="tg-breadcrumb">
                             <li><a href="/">Trang chủ</a></li>
-                            <li class="tg-active">@yield('title')</li>
+                            <li class="tg-active">Sản phẩm </li>
                         </ol>
                     </div>
                 </div>
@@ -103,11 +103,11 @@
                                                         <div class="tg-postbookcontent">
                                                             <div class="tg-bookscategories"
                                                                 style="padding: 10px; min-height: 80px; overflow-y: auto;">
-                                                                @if ($result->chude->isNotEmpty())
-                                                                    @foreach ($result->chude as $chuDe)
+                                                                @if ($result->topic->isNotEmpty())
+                                                                    @foreach ($result->topic as $topic)
                                                                         <span class="tg-themetag"
                                                                             style="margin-bottom:2%"><a href="#"
-                                                                                class="color-chude" style="color: white">{{ $chuDe->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
+                                                                                class="color-topic" style="color: white">{{ $topic->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
                                                                     @endforeach
                                                                 @else
                                                                     <span class="tg-themetag" style="margin-bottom:25%">Sản

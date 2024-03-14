@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Reviews;
-use App\Models\ChuDe;
-use App\Models\ChudeProduct;
-use App\Models\Products;
+use App\Models\Topic;
+use App\Models\TopicProduct;
+use App\Models\Product;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\User;
@@ -49,8 +49,8 @@ class ProductController extends Controller
 
     public function shareData()
     {
-        $newsPostCategory = CategoryPost::all();
-        $topProducts = Products::where('isHot', 1)
+        $newsPostCategory = CategoryPost::has('posts', '>', 0)->get();
+        $topProducts = Product::where('isHot', 1)
             ->orderBy('views', 'desc')
             ->orderBy('likes', 'desc')
             ->take(4)
@@ -60,9 +60,9 @@ class ProductController extends Controller
             ->take(4)
             ->get();
         $category = Category::orderBy('created_at', 'desc')->withCount('products')->get();
-        $products = Products::paginate(16);
-        $totalCount = Products::count();
-        $sumPro = Products::count();
+        $products = Product::paginate(16);
+        $totalCount = Product::count();
+        $sumPro = Product::count();
         $categoryDetails = CategoryDetail::all();
         $groupedData = [];
 
@@ -85,7 +85,7 @@ class ProductController extends Controller
 
             if ($user && isset($user->wishlist)) {
                 $wishlist = json_decode($user->wishlist, true) ?: [];
-                $wishlistItems = Products::whereIn('id', $wishlist)->get();
+                $wishlistItems = Product::whereIn('id', $wishlist)->get();
             }
         }
 
@@ -156,26 +156,26 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
 
         $productCounts = [
-            'all' => Products::count(), // Total product count
+            'all' => Product::count(), // Total product count
             'under_100k' => 0,
             'over_100k' => 0,
         ];
 
-        $results = Products::query();
+        $results = Product::query();
 
         $priceFilter = $request->input('priceFilter');
         if ($priceFilter && in_array($priceFilter, [1, 2])) {
             if ($priceFilter == 1) {
                 $results->where('price', '<=', 100000);
-                $productCounts['under_100k'] = Products::where('price', '<=', 100000)->count();
+                $productCounts['under_100k'] = Product::where('price', '<=', 100000)->count();
             } else {
                 $results->where('price', '>', 100000);
-                $productCounts['over_100k'] = Products::where('price', '>', 100000)->count();
+                $productCounts['over_100k'] = Product::where('price', '>', 100000)->count();
             }
         }
 
         $query = $request->input('search');
-        $results = Products::where('product_name', 'like', '%' . $query . '%')->paginate(16);
+        $results = Product::where('product_name', 'like', '%' . $query . '%')->paginate(16);
 
         return view('page.search', ['results' => $results, 'cart' => $cart, 'productCounts' => $productCounts]);
     }
@@ -184,11 +184,11 @@ class ProductController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        $productsWithChuDe = Products::with('chude')->get();
+        $productsWithTopic = Product::with('topic')->get();
 
-        $author = Products::with('authors')->get();
+        $author = Product::with('authors')->get();
 
-        $greatProduct = Products::where('isHot', 1)
+        $greatProduct = Product::where('isHot', 1)
             ->orderBy('views', 'desc')
             ->orderBy('likes', 'desc')
             ->take(6)
@@ -199,8 +199,8 @@ class ProductController extends Controller
         //     $product->average_rating = $product->averageRating();
         // }
 
-        $latestProducts = Products::orderBy('created_at')->take(3)->get();
-        $myProducts = Products::where('isHot', 1)->take(12)->get();
+        $latestProducts = Product::orderBy('created_at')->take(3)->get();
+        $myProducts = Product::where('isHot', 1)->take(12)->get();
 
         $popularPosts = Post::withCount('comments')
             ->with('comments') // Eager load comments
@@ -211,13 +211,13 @@ class ProductController extends Controller
             ->select('posts.*', 'admins.name as author_name')
             ->get();
 
-        $goodProducts = Products::all()
+        $goodProducts = Product::all()
             ->sortByDesc(function ($product) {
                 return $product->averageRating();
             })
             ->take(6);
 
-        $extraHotProduct = Products::where('isHot', 1)
+        $extraHotProduct = Product::where('isHot', 1)
             ->orderBy('views', 'desc')
             ->orderBy('likes', 'desc')
             ->first();
@@ -230,7 +230,7 @@ class ProductController extends Controller
 
         // dd($events);
 
-        return view('page.index', compact('myProducts', 'latestProducts', 'greatProduct', 'popularPosts', 'extraHotProduct', 'mainEvent', 'productsWithChuDe', 'author', 'cart', 'goodProducts'));
+        return view('page.index', compact('myProducts', 'latestProducts', 'greatProduct', 'popularPosts', 'extraHotProduct', 'mainEvent', 'productsWithTopic', 'author', 'cart', 'goodProducts'));
     }
 
     public function product(Request $request)
@@ -238,21 +238,21 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
 
         $productCounts = [
-            'all' => Products::count(), // Total product count
+            'all' => Product::count(), // Total product count
             'under_100k' => 0,
             'over_100k' => 0,
         ];
 
-        $query = Products::query();
+        $query = Product::query();
 
         $priceFilter = $request->input('priceFilter');
         if ($priceFilter && in_array($priceFilter, [1, 2])) {
             if ($priceFilter == 1) {
                 $query->where('price', '<=', 100000);
-                $productCounts['under_100k'] = Products::where('price', '<=', 100000)->count();
+                $productCounts['under_100k'] = Product::where('price', '<=', 100000)->count();
             } else {
                 $query->where('price', '>', 100000);
-                $productCounts['over_100k'] = Products::where('price', '>', 100000)->count();
+                $productCounts['over_100k'] = Product::where('price', '>', 100000)->count();
             }
         }
 
@@ -266,21 +266,21 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
     
         $productCounts = [
-            'all' => Products::count(), // Total product count
+            'all' => Product::count(), // Total product count
             'under_100k' => 0,
             'over_100k' => 0,
         ];
     
-        $query = Products::query();
+        $query = Product::query();
     
         $priceFilter = $request->input('priceFilter');
         if ($priceFilter && in_array($priceFilter, [1, 2])) {
             if ($priceFilter == 1) {
                 $query->where('price', '<=', 100000);
-                $productCounts['under_100k'] = Products::where('price', '<=', 100000)->count();
+                $productCounts['under_100k'] = Product::where('price', '<=', 100000)->count();
             } else {
                 $query->where('price', '>', 100000);
-                $productCounts['over_100k'] = Products::where('price', '>', 100000)->count();
+                $productCounts['over_100k'] = Product::where('price', '>', 100000)->count();
             }
         }
     
@@ -317,7 +317,7 @@ class ProductController extends Controller
             });
 
             if (empty($existingProduct)) {
-                $product = Products::find($productId, ['id', 'product_name', 'product_image', 'price']);
+                $product = Product::find($productId, ['id', 'product_name', 'product_image', 'price']);
 
                 if ($product) {
                     $wishlist[] = [
@@ -379,7 +379,7 @@ class ProductController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        $product = Products::where('product_slug', $slug)->first();
+        $product = Product::where('product_slug', $slug)->first();
 
         if (!$product) {
             return abort(404);
@@ -390,7 +390,7 @@ class ProductController extends Controller
         // Calculate the average rating
         $averageRating = $product->averageRating();
 
-        $relatedProducts = Products::where('product_slug', '!=', $slug)
+        $relatedProducts = Product::where('product_slug', '!=', $slug)
             ->take(6)
             ->get();
               $attributes = [];
@@ -410,7 +410,7 @@ class ProductController extends Controller
             'over_100k' => 0,
         ];
 
-        $query = Products::query();
+        $query = Product::query();
 
         $priceFilter = $request->input('priceFilter');
         if ($priceFilter && in_array($priceFilter, [1, 2])) {
@@ -448,7 +448,7 @@ class ProductController extends Controller
     {
         $cart = session()->get('cart', []);
 
-        $query = Products::where('weekly_discount', 1)
+        $query = Product::where('weekly_discount', 1)
             ->where('isVisible', 1)
             ->where('remaining', '>', 0)
             ->whereNotNull('discount_price');
@@ -471,7 +471,7 @@ class ProductController extends Controller
         $cart = session()->get('cart', []);
 
         $startOfWeek = Carbon::now()->startOfWeek();
-        $query = Products::where('isVisible', 1)
+        $query = Product::where('isVisible', 1)
             ->whereDate('created_at', '>=', $startOfWeek)
             ->where('remaining', '>', 0)
             ->orderBy('created_at', 'desc');

@@ -151,6 +151,7 @@
                                     <li class="menu-item-has-children">
                                         <a href="/news">Tin tức</a>
                                         <ul class="sub-menu">
+                                            
                                             @forelse ($newsPostCategory as $item)
                                                 <li><a
                                                         href="{{ route('newsCategoryShow', $item->post_category_slug) }}">{{ $item->post_category_name }}</a>

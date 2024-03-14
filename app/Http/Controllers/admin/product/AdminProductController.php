@@ -2,15 +2,15 @@
 namespace App\Http\Controllers\admin\product;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Http\Requests\ProductsRequest;
-use App\Models\Products;
+use App\Http\Requests\ProductRequest;
+use App\Models\Product;
 use App\Models\Author;
 use App\Models\Sellers;
 use App\Models\Category;
 use App\Models\CategoryProduct;
 use App\Models\AuthorProduct;
-use App\Models\ChudeProduct;
-use App\Models\ChuDe;
+use App\Models\TopicProduct;
+use App\Models\Topic;
 use CloudinaryLabs\CloudinaryLaravel\Facades\Cloudinary;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -22,7 +22,7 @@ class AdminProductController extends Controller
     }
     function allsp()
     {
-        $product = Products::orderBy('created_at', 'desc')->paginate(10);
+        $product = Product::orderBy('created_at', 'desc')->paginate(10);
         $authors = Author::all();
         if (!$product) {
         }
@@ -35,7 +35,7 @@ class AdminProductController extends Controller
     }
     public function onePro(string $slug)
     {
-        $product = Products::where('product_slug', $slug)->with('authors')->with('categories')->withCount('authors')->withCount('categories')->first();
+        $product = Product::where('product_slug', $slug)->with('authors')->with('categories')->withCount('authors')->withCount('categories')->first();
         if ($product) {
             return view('admin.product.onesp',compact('product'));
         }
@@ -65,7 +65,7 @@ class AdminProductController extends Controller
             $imagePath = Cloudinary::upload($request->file('product_image')->getRealPath())->getSecurePath();
         }
         $slug = slug_pro($request->slug);
-        $product = Products::create([
+        $product = Product::create([
             'product_name' => $request->name,
             'author' => $request->author,
             'product_slug' => $slug,
@@ -92,7 +92,7 @@ class AdminProductController extends Controller
     public function editPro(string $slug)
     {
         $authors = Author::all();
-        $product = Products::where('product_slug', $slug)->first();
+        $product = Product::where('product_slug', $slug)->first();
         if ($product && $product->attributes) {
             $attributes = json_decode($product->attributes, true);
         } else {
@@ -102,7 +102,7 @@ class AdminProductController extends Controller
     }
     public function updatePro(Request $request, $id)
     {
-        $product = Products::find($id);
+        $product = Product::find($id);
         if (!$product) {
             return redirect()->route('admin.allsp')->with('error', 'Sản phẩm không tồn tại.');
         }
@@ -136,39 +136,39 @@ class AdminProductController extends Controller
     }
     function deletePro(int $id)
     {
-        Products::where('id', $id)->delete();
+        Product::where('id', $id)->delete();
     }
     public function destroy($id)
     {
-        $pro = Products::withTrashed()->find($id);
+        $pro = Product::withTrashed()->find($id);
         $pro->forceDelete();
     }
     public function editfun($id)
     {
-        $products = Products::find($id);
-        $ds_chu_de = ChuDe::all();
+        $Product = Product::find($id);
+        $ds_chu_de = Topic::all();
         $ds_danhmuc = Category::all();
         $ds_tacgia = Author::all();
-        $tacgia = AuthorProduct::where('product_id', '=', $id)->get();
+        $tacgia = AuthorProduct::where('products_id', '=', $id)->get();
         $arr_ncc = stdClassToArray($tacgia);
         $arr_tacgia = array();
         foreach ($arr_ncc as  $value) {
             $arr_tacgia[] = $value['author_id'];
         }
-        $danhmuc = CategoryProduct::where('products_id', '=', $id)->get();
+        $danhmuc = CategoryProduct::where('Products_id', '=', $id)->get();
         $arr_dm = stdClassToArray($danhmuc);
         $arr_danhmuc = array();
         foreach ($arr_dm as  $value) {
             $arr_danhmuc[] = $value['category_id'];
         }
-        $chude_sp = ChudeProduct::where('product_id', '=', $id)->get();
+        $chude_sp = TopicProduct::where('products_id', '=', $id)->get();
         $arr_cd = stdClassToArray($chude_sp);
         $arr_chu_de_sp = array();
         foreach ($arr_cd as  $value) {
             $arr_chu_de_sp[] = $value['chu_de_id'];
         }
         return view('admin.product.editfunction')
-            ->with('products', $products)
+            ->with('Product', $Product)
             ->with('arr_danhmuc', $arr_danhmuc)
             ->with('ds_danhmuc', $ds_danhmuc)
             ->with('arr_tacgia', $arr_tacgia)
@@ -188,17 +188,17 @@ class AdminProductController extends Controller
             $model->save();
         }
         $arr_danhmuc = isset($request->category_id) ? $request->category_id : array();
-        CategoryProduct::where('products_id', '=', $product_id)->delete();
+        CategoryProduct::where('Product_id', '=', $product_id)->delete();
         foreach ($arr_danhmuc as  $value) {
             $model = new CategoryProduct();
             $model->category_id = $value;
-            $model->products_id = $product_id;
+            $model->Product_id = $product_id;
             $model->save();
         }
         $arr_cd = isset($request->chu_de_id) ? $request->chu_de_id : array();
-        ChudeProduct::where('product_id', '=', $product_id)->delete();
+        TopicProduct::where('product_id', '=', $product_id)->delete();
         foreach ($arr_cd as  $value) {
-            $model = new ChudeProduct();
+            $model = new TopicProduct();
             $model->chu_de_id = $value;
             $model->product_id = $product_id;
             $model->save();
@@ -207,7 +207,7 @@ class AdminProductController extends Controller
         return redirect(route('admin.allsp'));
     }
     public function allspintrash() {
-        $product = Products::onlyTrashed()->orderBy('created_at', 'desc')->paginate(10);
+        $product = Product::onlyTrashed()->orderBy('created_at', 'desc')->paginate(10);
         $authors = Author::all();
         if (!$product) {
         }
@@ -220,7 +220,7 @@ class AdminProductController extends Controller
         ]);
     }
     public function restore(int $id) {
-        $pro = Products::withTrashed()->find($id);
+        $pro = Product::withTrashed()->find($id);
         $pro->restore();
         return redirect()->back()->with('message', 'Sản phẩm đã được khôi phục thành công.');
     }

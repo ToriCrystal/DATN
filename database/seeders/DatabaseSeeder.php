@@ -34,7 +34,7 @@ class DatabaseSeeder extends Seeder
         ]);
         $this->call([
             // Other seeders here
-            ChudeSeeder::class,
+            TopicSeeder::class,
         ]);
         $this->call([
             // Other seeders here

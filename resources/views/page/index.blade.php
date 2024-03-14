@@ -74,7 +74,7 @@
             animation: my 700ms infinite;
         }
 
-        .color-chude {
+        .color-topic {
             color: white
         }
 
@@ -142,11 +142,13 @@
         <section class="tg-sectionspace tg-haslayout">
 
             <div class="container" style="margin-top:-5%">
+                @if ($mainEvent)
                 <div style=" margin-bottom:5%;">
                     <center>
                         <h2 class="test">Chúc bạn có một kì {{ $mainEvent->event_name ?? '' }} vui vẻ!</h2>
                     </center>
                 </div>
+                @endif
                 <div class="row">
                     <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                         <div class="tg-sectionhead">
@@ -191,10 +193,10 @@
                                         <div class="tg-postbookcontent">
                                             <div class="tg-bookscategories"
                                                 style="padding: 10px; min-height: 40px; overflow-y: auto;">
-                                                @if ($product->chude->isNotEmpty())
-                                                    @foreach ($product->chude as $chuDe)
+                                                @if ($product->topic->isNotEmpty())
+                                                    @foreach ($product->topic as $topic)
                                                         <span class="tg-themetag" style="margin-bottom: 25%"><a href="#"
-                                                                class="color-chude" style="color: white">{{ $chuDe->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
+                                                                class="color-topic" style="color: white">{{ $topic->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
                                                     @endforeach
                                                 @else
                                                     <span class="tg-themetag" style="margin-bottom:25%">Sản phẩm ưa
@@ -407,11 +409,11 @@
                                                 <div class="tg-postbookcontent">
                                                     <div class="tg-bookscategories"
                                                         style="padding: 10px; min-height: 40px; overflow-y: auto;">
-                                                        @if ($item->chude->isNotEmpty())
-                                                            @foreach ($item->chude as $chuDe)
+                                                        @if ($item->topic->isNotEmpty())
+                                                            @foreach ($item->topic as $topic)
                                                                 <span class="tg-themetag" style="margin-bottom: 25%"><a
                                                                         href="#"
-                                                                        class="color-chude">{{ $chuDe->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
+                                                                        class="color-topic">{{ $topic->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
                                                             @endforeach
                                                         @else
                                                             <span class="tg-themetag" style="margin-bottom: 25%">Sản phẩm

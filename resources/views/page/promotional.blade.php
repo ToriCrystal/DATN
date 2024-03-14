@@ -100,11 +100,11 @@
 
                                                     </figure>
                                                     <div class="tg-postbookcontent">
-                                                        @if ($product->chude->isNotEmpty())
-                                                            @foreach ($product->chude as $chuDe)
+                                                        @if ($product->topic->isNotEmpty())
+                                                            @foreach ($product->topic as $topic)
                                                                 <span class="tg-themetag" style="margin-bottom:2%"><a
                                                                         href="#"
-                                                                        class="color-chude" style="color: white">{{ $chuDe->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
+                                                                        class="color-topic" style="color: white">{{ $topic->chu_de_ten_vn }}&nbsp;&nbsp;&nbsp;</a></span>
                                                             @endforeach
                                                         @else
                                                             <span class="tg-themetag" style="margin-bottom:25%">Sản phẩm ưa

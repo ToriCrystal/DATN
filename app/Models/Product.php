@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Products extends Model
+class Product extends Model
 {
     use HasFactory, SoftDeletes;
     protected $table = 'products';
@@ -30,7 +30,7 @@ class Products extends Model
     //Giảm giá cả tuần
     public function reviews()
     {
-        return $this->hasMany(Reviews::class, 'product_id');
+        return $this->hasMany(Review::class, 'product_id');
     }
 
     public function averageRating()
@@ -39,8 +39,8 @@ class Products extends Model
         return $count > 0 ? $this->reviews()->avg('rating') : 0;
     }
 
-    public function chude()
+    public function topic()
     {
-        return $this->belongsToMany(ChuDe::class, 'chude_product', 'product_id', 'chu_de_id');
+        return $this->belongsToMany(Topic::class, 'topic_product', 'product_id', 'topic_id');
     }
 }
