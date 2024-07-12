@@ -48,7 +48,7 @@ class User extends Authenticatable
 
     public function seller()
     {
-        return $this->hasOne(Sellers::class);
+        return $this->hasOne(Seller::class);
     }
 
     public function isSeller()

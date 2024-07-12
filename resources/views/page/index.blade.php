@@ -71,7 +71,7 @@
             -webkit-animation: my 700ms infinite;
             -moz-animation: my 700ms infinite;
             -o-animation: my 700ms infinite;
-            animation: my 700ms infinite;
+            animation: my 700ms infinite;extraHotProduct
         }
 
         .color-topic {

@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\Products;
+use App\Models\Product;
 use App\Models\CategoryProduct;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Arr;
@@ -21,7 +21,7 @@ class ProductSeeder extends Seeder
         DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         // Xóa dữ liệu cũ nếu cần
-        Products::truncate();
+        Product::truncate();
 
         // Chèn dữ liệu mới
         $faker = \Faker\Factory::create();
@@ -43,7 +43,7 @@ class ProductSeeder extends Seeder
                 'Đề cập đến những vấn đề xã hội quan trọng.',
                 // Thêm các cụm từ khác tùy ý
             ];
-            Products::create([
+            Product::create([
                 'product_name' => $ht,
                 'product_slug' => createSlug($ht),
                 'price' => $faker->randomFloat(2, 10, 1000),

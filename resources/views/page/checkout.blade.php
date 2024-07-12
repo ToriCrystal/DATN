@@ -57,8 +57,8 @@
                                         oninvalid="this.setCustomValidity('Vui lòng nhập số điện thoại hợp lệ')" required>
                                 </div>
                                 <!-- <div class="col-md-6 form-group p_star">
-                                                <input type="text" class="form-control" id="email" name="compemailany" placeholder="Email của bạn">
-                                            </div> -->
+                                                                <input type="text" class="form-control" id="email" name="compemailany" placeholder="Email của bạn">
+                                                            </div> -->
 
                                 <div class="col-md-12 form-group p_star">
                                     <label for="city">Chọn tỉnh/thành:</label>
@@ -255,7 +255,7 @@
                                     document.getElementById('district').addEventListener('change', calculate);
                                     document.getElementById('ward').addEventListener('change', calculate);
 
-                                    function calculate () {
+                                    function calculate() {
                                         var district_id = document.getElementById("district").value;
                                         var ward_code_1 = document.getElementById("ward").value;
                                         console.log("ward_code 1", ward_code_1);
@@ -336,9 +336,11 @@
                                     </select>
                                 </div>
 
-                                <input type="hidden" name="total_price" id="total_price" value="{{ session('cart.total', 0) }}">
+                                <input type="hidden" name="total_price" id="total_price"
+                                    value="{{ session('cart.total', 0) }}">
                                 <input type="hidden" name="shipping_fee" id="shipping_fee" value="0">
-                                <input type="hidden" name="discount_amount" id="discount_amount" value="{{ session('cart.discount_amount', 0) }}">
+                                <input type="hidden" name="discount_amount" id="discount_amount"
+                                    value="{{ session('cart.discount_amount', 0) }}">
                                 <!-- </form> -->
                             </div>
 
@@ -354,7 +356,8 @@
                                                     <a href="#" class="limited-text">
                                                         {{ mb_strimwidth($item['product_name'], 0, 20, '...') }}
                                                         <span class="middle">x {{ $item['so_luong'] }}</span>
-                                                        <span class="last">{{ $item['price'] * $item['so_luong'] }} VNĐ</span>
+                                                        <span class="last">{{ $item['price'] * $item['so_luong'] }}
+                                                            VNĐ</span>
                                                     </a>
                                                 </li>
                                             @endif
@@ -364,12 +367,16 @@
                                         <li>
                                             <a href="#">Tổng đơn hàng <span id="total_amount">
                                                     {{ session('cart.total', 0) }} VNĐ </span>
-                                            </a></li>
-                                                    <li>
-                                                        <a href="#">Giá đã giảm <span>{{ session('cart.discount_amount', 0) }} VNĐ</span></a></li>
-                                                </li>
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Giá đã giảm <span>{{ session('cart.discount_amount', 0) }}
+                                                    VNĐ</span></a>
+                                        </li>
+                                        </li>
                                         <li><a href="#">Phí ship <span id="fee_ship"> 0 VNĐ</span></a></li>
-                                        <li><a href="#">Tổng cần thanh toán <span id="total_payment"> 0 VNĐ</span></a></li>
+                                        <li><a href="#">Tổng cần thanh toán <span id="total_payment"> 0 VNĐ</span></a>
+                                        </li>
                                     </ul>
                                     <div class="payment_item">
                                         <div class="radion_btn">
@@ -476,8 +483,8 @@
                                         <a href="/term-of-use">điều khoản & điều kiện*</a>
                                     </div>
                                     <!-- <div id="termsAlert" class="alert" style="display: none;">
-                                            Vui lòng chấp nhận điều khoản và điều kiện để tiếp tục.
-                                        </div> -->
+                                                            Vui lòng chấp nhận điều khoản và điều kiện để tiếp tục.
+                                                        </div> -->
 
                                     <!-- <a class="primary-btn" href="#"></a> -->
                                     <button style="margin: auto;" class="primary-btn" type="submit" name="btnDatHang">Tiếp
@@ -517,3 +524,8 @@
         </script>
     @endauth
 @endsection
+
+<?php
+$data = array("name" => "John", "age" => 30);
+echo json_encode($data);
+?>

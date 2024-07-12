@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Products;
+use App\Models\Product;
 use App\Models\User;
 
 class ReviewsSeeder extends Seeder
@@ -16,7 +16,7 @@ class ReviewsSeeder extends Seeder
     public function run(): void
     {
         
-        $products = Products::take(100)->get(); // Take the first 100 products
+        $products = Product::take(100)->get(); // Take the first 100 products
         $users = User::take(10)->get(); // Take the first 10 users
 
         foreach ($products as $product) {

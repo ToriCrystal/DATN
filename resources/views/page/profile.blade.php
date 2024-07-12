@@ -16,6 +16,7 @@
 
         }
     </style>
+
     <div class="container bootstrap snippets bootdey">
         <h2 style="margin-top: 10px">Thay đổi thông tin</h2>
         <hr>
@@ -29,8 +30,9 @@
                 <div class="col-md-3">
                     <div class="text-center">
                         <img style="height: 150px; /* Ensure the height matches the width to create a perfect circle */border-radius: 50%;object-fit: cover;width: 150px"
-                        id="avatar-preview" src="{{ $user->image != '' ?  $user->image : '/images/users/userdefault.jpg' }}" 
-                        class="avatar img-circle img-thumbnail" alt="avatar">
+                            id="avatar-preview"
+                            src="{{ $user->image != '' ? $user->image : '/images/users/userdefault.jpg' }}"
+                            class="avatar img-circle img-thumbnail" alt="avatar">
 
                         <h6>Thay đổi ảnh đại diện của bạn</h6>
                         <input type="file" id="avatar" name="avatar" class="form-control">
